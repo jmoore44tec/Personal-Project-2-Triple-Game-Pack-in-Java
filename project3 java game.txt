@@ -1,0 +1,283 @@
+//Project 3 - Java based triple pack of games
+
+import java.util.*;
+
+class TriplePackGame {
+    public static void main(String[] args) {
+        Scanner console = new Scanner(System.in);
+        Random rand = new Random();
+
+        System.out.println("Would you like to play a simple game?");
+        System.out.println("1: Yes");
+        System.out.println("2: No");
+        
+        int fchoice = console.nextInt();
+        
+        if (fchoice == 2) {
+            System.out.println("You're no fun! Fine...");
+        } else if (fchoice == 1) {
+            System.out.println("Ohhh say less");
+
+            boolean gOver = false;
+            while (!gOver) {
+                System.out.println("Choose your game!");
+                System.out.println("1: 21");
+                System.out.println("2: Matching Game");
+                System.out.println("3: Guess Who (Anime Edition)");
+                int gchoice = console.nextInt();
+                
+                if (gchoice == 1) {
+                    System.out.println("You've chosen to play 21. No backing out now you gambling addict!");
+                    
+                    int playerHand = rand.nextInt(11) + 1;
+                    int dealerHand = rand.nextInt(11) + 1;
+                    
+                    System.out.println("Your first card is: " + playerHand);
+                    System.out.println("Dealer's first card is: " + dealerHand);
+
+                    boolean playerStays = false;
+                    while (!playerStays && playerHand <= 21) {
+                        System.out.println("Would you like another card, or would you like to stay?");
+                        System.out.println("1: Hit");
+                        System.out.println("2: Stay");
+                        int choice21 = console.nextInt();
+                        
+                        if (choice21 == 1) { // Player chooses to hit
+                            int newCard = rand.nextInt(11) + 1;
+                            playerHand += newCard;
+                            System.out.println("You drew a " + newCard + ". Your total is now " + playerHand);
+                            
+                            if (playerHand > 21) {
+                                System.out.println("Bust! You exceeded 21. The house wins.");
+                                gOver = true;
+                                break;
+                            }
+                        } else if (choice21 == 2) { // Player chooses to stay
+                            playerStays = true;
+                        } else {
+                            System.out.println("Invalid choice, please choose 1 or 2.");
+                        }
+                    }
+                    
+                    // Dealer's turn
+                    while (dealerHand < 17 && playerHand <= 21) {
+                        int dealerNewCard = rand.nextInt(11) + 1;
+                        dealerHand += dealerNewCard;
+                        System.out.println("Dealer draws a card. Dealer's total is now " + dealerHand);
+                    }
+
+                    if (dealerHand > 21) {
+                        System.out.println("Dealer busts! You win!");
+                    } else if (dealerHand >= playerHand) {
+                        System.out.println("Dealer wins with a total of " + dealerHand + " against your " + playerHand);
+                    } else {
+                        System.out.println("You win with a total of " + playerHand + " against dealer's " + dealerHand);
+                    }
+                    
+                    gOver = true;
+                } else if (gchoice == 2) {
+                    System.out.println("You've chosen to play Matching Game");
+                    System.out.println("You must really be a gambler, huh? No changing your mind now...");
+                    
+                    System.out.println("Game doesn't exist yet bucko");
+                    // Implement Matching Game logic here
+                    gOver = true;
+                } else if (gchoice == 3) {
+
+                    System.out.println("You've chosen to play Guess Who (Anime Edition)");
+                    System.out.println("I knew you were a weeb lol");
+                    System.out.println("(First names only.)");
+                    System.out.println("(The names ARE case-sensitive.)");
+                    
+                    int seed = rand.nextInt(3);
+                    String playerAnswer;
+                    //int points = 0;
+                    Scanner guess = new Scanner(System.in);
+                    
+                    if (seed == 0) {
+                        //Chopper
+                        String answer = "Chopper";
+                        System.out.println("Your first clue is that this character has a tragic backstory and is from a long-running shounen...");
+                        System.out.println("Who am I?");
+                        playerAnswer = guess.nextLine();
+                        
+                        if (playerAnswer.equals(answer)) {
+
+                            System.out.println("Your status: S Rank Weeb");
+                        } else {
+                            System.out.println("Not quite. Try again...");
+                            System.out.println("Your second hint is that this character has multiple transformations...");
+                            System.out.println("Who am I?");
+                            playerAnswer = guess.nextLine();
+                            
+                            if (playerAnswer.equals(answer)) {
+                                System.out.println("Correct! Only two hints and you guessed it!");
+                                System.out.println("Your status: A Rank Weeb");
+                            } else {
+                                System.out.println("Nope, still not it. Here comes another hint...");
+                                System.out.println("This character is animalistic");
+                                System.out.println("Who am I?");
+                                playerAnswer = guess.nextLine();
+                                
+                                if (playerAnswer.equals(answer)) {
+                                    System.out.println("Correct! Wow, only 3 hints to get here. Not bad at all!");
+                                    System.out.println("Your status: B Rank Weeb");
+                                } else {
+                                    System.out.println("You're struggling huh?");
+                                    System.out.println("Your final hint is that this character is from One Piece...");
+                                    System.out.println("Final Guess! Who am I?!");
+                                    playerAnswer = guess.nextLine();
+                                    
+                                    if (playerAnswer.equals(answer)) {
+                                        System.out.println("Correct! I'm proud of you!");
+                                        System.out.println("You really like that come-from-behind victory trope don't you?");
+                                        System.out.println("Your status: C Rank Weeb...");
+                                    }
+                                }
+                            }
+                        }
+                          
+                    } else if (seed == 1) {
+                        //Lelouche
+                        String answer = "Lelouche";
+                        System.out.println("Your first clue is that this character has a tragic backstory and would assume they're smarter than you...");
+                        System.out.println("Who am I?");
+                        playerAnswer = guess.nextLine();
+                        
+                        if (playerAnswer.equals(answer)) {
+
+                            System.out.println("Your status: S Rank Weeb");
+                        } else {
+                            System.out.println("Not quite. Try again...");
+                            System.out.println("Your second hint is that this character is very calculated, careful (for the most part) of their every move...");
+                            System.out.println("Who am I?");
+                            playerAnswer = guess.nextLine();
+                            
+                            if (playerAnswer.equals(answer)) {
+                                System.out.println("Correct! Only two hints and you guessed it!");
+                                System.out.println("Your status: A Rank Weeb");
+                            } else {
+                                System.out.println("Nope, still not it. Here comes another hint...");
+                                System.out.println("This character is a leader, first and foremost, but is not afraid to get their hands dirty");
+                                System.out.println("Who am I?");
+                                playerAnswer = guess.nextLine();
+                                
+                                if (playerAnswer.equals(answer)) {
+                                    System.out.println("Correct! Wow, only 3 hints to get here. Not bad at all!");
+                                    System.out.println("Your status: B Rank Weeb");
+                                } else {
+                                    System.out.println("You're struggling huh?");
+                                    System.out.println("Your final hint is that this character is pilots a mech and has supernatural powers...");
+                                    System.out.println("Final Guess! Who am I?!");
+                                    playerAnswer = guess.nextLine();
+                                    
+                                    if (playerAnswer.equals(answer)) {
+                                        System.out.println("Correct! I'm proud of you!");
+                                        System.out.println("You really like that come-from-behind victory trope don't you?");
+                                        System.out.println("Your status: C Rank Weeb...");
+                                    }
+                                }
+                            }
+                        }
+                        
+                    } else if (seed == 2) {
+                        //Madoka
+                        String answer = "Madoka";
+                        System.out.println("Your first clue is that this character sacrificed themself for the greater good...");
+                        System.out.println("Who am I?");
+                        playerAnswer = guess.nextLine();
+                        
+                        if (playerAnswer.equals(answer)) {
+
+                            System.out.println("Your status: S Rank Weeb");
+                        } else {
+                            System.out.println("Not quite. Try again...");
+                            System.out.println("Your second hint is that this character is one of the most powerful characters in anime...");
+                            System.out.println("Who am I?");
+                            playerAnswer = guess.nextLine();
+                            
+                            if (playerAnswer.equals(answer)) {
+                                System.out.println("Correct! Only two hints and you guessed it!");
+                                System.out.println("Your status: A Rank Weeb");
+                            } else {
+                                System.out.println("Nope, still not it. Here comes another hint...");
+                                System.out.println("This character is is a 'Magical Girl'");
+                                System.out.println("Who am I?");
+                                playerAnswer = guess.nextLine();
+                                
+                                if (playerAnswer.equals(answer)) {
+                                    System.out.println("Correct! Wow, only 3 hints to get here. Not bad at all!");
+                                    System.out.println("Your status: B Rank Weeb");
+                                } else {
+                                    System.out.println("You're struggling huh?");
+                                    System.out.println("Your final hint is that this character has a best frien who can manipulate time...");
+                                    System.out.println("Final Guess! Who am I?!");
+                                    playerAnswer = guess.nextLine();
+                                    
+                                    if (playerAnswer.equals(answer)) {
+                                        System.out.println("Correct! I'm proud of you!");
+                                        System.out.println("You really like that come-from-behind victory trope don't you?");
+                                        System.out.println("Your status: C Rank Weeb...");
+                                    }
+                                }
+                            }
+                        }
+                        
+                    } else if (seed ==3) {
+                        //Shin Chan
+                        String answer = "Shin Chan";
+                        System.out.println("Your first clue is that this character will do anything it takes to get their favorite merch...");
+                        System.out.println("Who am I?");
+                        playerAnswer = guess.nextLine();
+                        
+                        if (playerAnswer.equals(answer)) {
+
+                            System.out.println("Your status: S Rank Weeb");
+                        } else {
+                            System.out.println("Not quite. Try again...");
+                            System.out.println("Your second hint is that this character is a child with one sibling and a dog...");
+                            System.out.println("Who am I?");
+                            playerAnswer = guess.nextLine();
+                            
+                            if (playerAnswer.equals(answer)) {
+                                System.out.println("Correct! Only two hints and you guessed it!");
+                                System.out.println("Your status: A Rank Weeb");
+                            } else {
+                                System.out.println("Nope, still not it. Here comes another hint...");
+                                System.out.println("This character is usually depicted wearing a red shirt and yellow shorts");
+                                System.out.println("Who am I?");
+                                playerAnswer = guess.nextLine();
+                                
+                                if (playerAnswer.equals(answer)) {
+                                    System.out.println("Correct! Wow, only 3 hints to get here. Not bad at all!");
+                                    System.out.println("Your status: B Rank Weeb");
+                                } else {
+                                    System.out.println("You're struggling huh?");
+                                    System.out.println("Your final hint is that this loves to sing and dance...");
+                                    System.out.println("Final Guess! Who am I?!");
+                                    playerAnswer = guess.nextLine();
+                                    
+                                    if (playerAnswer.equals(answer)) {
+                                        System.out.println("Correct! I'm proud of you!");
+                                        System.out.println("You really like that come-from-behind victory trope don't you?");
+                                        System.out.println("Your status: C Rank Weeb...");
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                    
+                    gOver = true;
+                } else {
+                    System.out.println("Invalid game choice. Please choose 1, 2, or 3.");
+                }
+            }
+        } else {
+            System.out.println("I said choose 1 or 2...");
+        }
+        
+        System.out.println("Thanks for playing and making this project worth my pain!");
+        console.close();
+    }
+}
